@@ -8,6 +8,7 @@ let inputData;
 async function preload() {
     console.log('Fetching Data');
     $.getJSON("./data.json", async function (data) {
+        console.log(data.results);
         await formatData(data.results)
     });
 }
@@ -161,5 +162,7 @@ async function process() {
     document.getElementById("club").innerHTML = "";
     document.getElementById("potential").innerHTML = "";
     document.getElementById("overall").innerHTML = "";
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     await preload();
 }
