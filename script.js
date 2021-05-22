@@ -8,7 +8,6 @@ let inputData;
 async function preload() {
     console.log('Fetching Data');
     $.getJSON("./data.json", async function (data) {
-        console.log(data.results);
         await formatData(data.results)
     });
 }
@@ -51,11 +50,6 @@ async function formatData(data) {
         useBias: true,
         activation: 'relu'
     });
-    let hidden3 = tf.layers.dense({
-           units: 30,
-        useBias: true,
-        activation: 'tanh'
-    });
     let output = tf.layers.dense({
         units: 3000,
         activation: 'softmax'
@@ -63,7 +57,6 @@ async function formatData(data) {
 
     model.add(hidden);
     model.add(hidden2);
-    model.add(hidden3);
     model.add(output);
 
     //create optimiser
