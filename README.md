@@ -1,2 +1,4 @@
 # footballerinyou
-This is a simple, fun web app that suggests a player with similar attributes from the given input using Machine Learning. This application is developed as a part of my ML learning process. 
+This is a fun game. User can give their soccer attributes and the system will predict you a player that with position ,overall and potential. 
+
+The power of ML is something amazing. With very less code processing more than thousands of record and gives a best solution.
