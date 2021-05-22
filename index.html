@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict the player In you</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- name: <label id="plyername"></label> <br />
+    age: <label id="age"></label> <br />
+    position: <label id="position"></label> <br />
+    club: <label id="club"></label> <br />
+    potential: <label id="potential"></label> <br />
+    overall: <label id="overall"></label> <br />
+    preferd foot: <label id="pf"></label> <br /> -->
+    <div class="slide-container">
+        <div class="wrapper">
+            <div class="clash-card barbarian">
+                <div class="clash-card__image clash-card__image--barbarian">
+                    <img id="image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png"
+                        alt="barbarian" />
+                </div>
+                <div class="clash-card__level clash-card__level--barbarian" id="position"></div>
+                <div class="clash-card__unit-name" id="plyername"></div>
+                <div class="clash-card__unit-description" id="club">
+                    Fill the form with your attributes and AI powered system wil find your Player Double. Will take
+                    a minute to generate.<br />
+                    <a href="https://www.linkedin.com/in/anoopgcmz/" target="_blank">@Anoop</a>
+                </div>
+
+                <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
+                    <div class="one-third">
+                        <div class="stat" id="age"></div>
+                        <div class="stat-value">Age</div>
+                    </div>
+
+                    <div class="one-third">
+                        <div class="stat" id="overall"></div>
+                        <div class="stat-value">Overall</div>
+                    </div>
+
+                    <div class="one-third no-border">
+                        <div class="stat" id="potential"></div>
+                        <div class="stat-value">Potential</div>
+                    </div>
+                </div>
+            </div> <!-- end clash-card barbarian-->
+        </div> <!-- end wrapper -->
+    </div> <!-- end container -->
+    <div class="container-fluid">
+        <form name="football">
+            <div class="form-row">
+                <div class="card" style="width: 23rem;">
+                    <div class="card-header">
+                        Ball Skills
+                    </div>
+                    <div>
+                        <div class="form-group cardValue">
+                            <label for="pfin">Prefered Foot</label>
+                            <select id="pfin" class="form-control">
+                                <option selected value="1">Right</option>
+                                <option value="0">Left</option>
+                            </select>
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="dribbling">Dribbling</label>
+                            <input type="number" class="form-control" id="dribbling" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="ballcontrol">Ball Control</label>
+                            <input type="number" class="form-control" id="ballcontrol" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="penalties">Penalties</label>
+                            <input type="number" class="form-control" id="penalties" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="volleys">Volleys</label>
+                            <input type="number" class="form-control" id="volleys" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="sprintspeed">Sprint Speed</label>
+                            <input type="number" class="form-control" id="sprintspeed" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 23rem;">
+                    <div class="card-header">
+                        Shooting
+                    </div>
+                    <div>
+                        <div class="form-group cardValue">
+                            <label for="headingaccuracy">Heading</label>
+                            <input type="number" class="form-control" id="headingaccuracy" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="shotpower">Shot Power</label>
+                            <input type="number" class="form-control" id="shotpower" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="finishing">Finishing</label>
+                            <input type="number" class="form-control" id="finishing" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="longShots">Long Shot</label>
+                            <input type="number" class="form-control" id="longshots" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="curve">Curve</label>
+                            <input type="number" class="form-control" id="curve" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="fkaccuracy">Free Kick Accuracy</label>
+                            <input type="number" class="form-control" id="fkaccuracy" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 23rem;">
+                    <div class="card-header">
+                        Defence & Passing
+                    </div>
+                    <div>
+                        <div class="form-group cardValue">
+                            <label for="marking">Marking</label>
+                            <input type="number" class="form-control" id="marking" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="slidingtackle">Slide Tackle</label>
+                            <input type="number" class="form-control" id="slidingtackle" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="standingtackle">Stand Tackle</label>
+                            <input type="number" class="form-control" id="standingtackle" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="crossing">Crossing</label>
+                            <input type="number" class="form-control" id="crossing" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="shortpassing">Short Pass</label>
+                            <input type="number" class="form-control" id="shortpassing" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="longpassing">Long Pass</label>
+                            <input type="number" class="form-control" id="longpassing" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 23rem;">
+                    <div class="card-header">
+                        Physical
+                    </div>
+                    <div>
+                        <div class="form-group cardValue">
+                            <label for="acceleration">Acceleration</label>
+                            <input type="number" class="form-control" id="acceleration" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="stamina">Stamina</label>
+                            <input type="number" class="form-control" id="stamina" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="strength">Strength</label>
+                            <input type="number" class="form-control" id="strength" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="balance">Balance</label>
+                            <input type="number" class="form-control" id="balance" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="agility">Agility</label>
+                            <input type="number" class="form-control" id="agility" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="jumping">Jumping</label>
+                            <input type="number" class="form-control" id="jumping" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 23rem;">
+                    <div class="card-header">
+                        Mental
+                    </div>
+                    <div>
+                        <div class="form-group cardValue">
+                            <label for="aggression">Aggression</label>
+                            <input type="number" class="form-control" id="aggression" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="reactions">Reactions</label>
+                            <input type="number" class="form-control" id="reactions" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="positioning">Att. Position</label>
+                            <input type="number" class="form-control" id="positioning" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="interceptions">Interceptions</label>
+                            <input type="number" class="form-control" id="interceptions" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="vision">Vision</label>
+                            <input type="number" class="form-control" id="vision" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="composure">Composure</label>
+                            <input type="number" class="form-control" id="composure" value="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 23rem;">
+                    <div class="card-header">
+                        Goalkeeper
+                    </div>
+                    <div>
+                        <div class="form-group cardValue">
+                            <label for="gkdiving">GK Diving</label>
+                            <input type="number" class="form-control" id="gkdiving" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="gkhandling">GK Handling</label>
+                            <input type="number" class="form-control" id="gkhandling" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="gkkicking">GK Kicking</label>
+                            <input type="number" class="form-control" id="gkkicking" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="gkpositioning">GK Positioning</label>
+                            <input type="number" class="form-control" id="gkpositioning" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <label for="gkreflexes">GK Reflexes</label>
+                            <input type="number" class="form-control" id="gkreflexes" value="50">
+                        </div>
+                        <div class="form-group cardValue">
+                            <button style="margin-top: 28px;padding-top: 2px;" type='button' onclick="process()"
+                                class="btn btn-dark form-control">Generate</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <div class="container text-right">
+        <a class="about" href="about.html" target="_blank">About</a>
+    </div>
+    <div>
+        <br />
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
