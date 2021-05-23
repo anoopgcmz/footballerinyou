@@ -28,10 +28,10 @@ async function formatData(data) {
             'position': data[i].Position,
             'pf': data[i]['Preferred Foot']
         });
-        //posLabel.push(data[i].Position);
+        posLabel.push(data[i].Position);
         playerLabelTens.push(i)
     }
-    //console.log(...new Set(posLabel));
+    console.log(...new Set(posLabel));
     xs = tf.tensor2d(playerRecord);
     let labelTensor = tf.tensor1d(playerLabelTens, 'int32');
     ys = tf.oneHot(labelTensor, 3000);
@@ -94,22 +94,23 @@ async function train() {
 
 async function test() {
     console.log(inputData);
-    let input = tf.tensor2d([inputData]);
-    let result = model.predict(input);
-    let resIndex = result.argMax(1).dataSync();
-    let image= ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer.png","https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/giant.png","https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin.png","https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard.png","https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png"];
-    let randNuber = Math.floor(Math.random() * image.length);
-    console.log(randNuber);
-    document.getElementById("plyername").innerHTML = playerLabel[resIndex[0]].name;
-    document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
-    document.getElementById("position").innerHTML = playerLabel[resIndex[0]].position;
-    document.getElementById("club").innerHTML = playerLabel[resIndex[0]].club;
-    document.getElementById("potential").innerHTML = playerLabel[resIndex[0]].potential;
-    document.getElementById("overall").innerHTML = playerLabel[resIndex[0]].overall;
-    // document.getElementById("pf").innerHTML = playerLabel[resIndex[0]].pf;
-    document.getElementById("image").src = image[randNuber];
-    console.log(`The player matches the input ${inputData} is`, resIndex, playerLabel[resIndex[0]]);
-
+    tf.tidy(() => {
+        let input = tf.tensor2d([inputData]);
+        let result = model.predict(input);
+        let resIndex = result.argMax(1).dataSync();
+        let image = ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/giant.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png"];
+        let randNuber = Math.floor(Math.random() * image.length);
+        console.log(randNuber);
+        document.getElementById("plyername").innerHTML = playerLabel[resIndex[0]].name;
+        document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
+        document.getElementById("position").innerHTML = playerLabel[resIndex[0]].position;
+        document.getElementById("club").innerHTML = playerLabel[resIndex[0]].club;
+        document.getElementById("potential").innerHTML = playerLabel[resIndex[0]].potential;
+        document.getElementById("overall").innerHTML = playerLabel[resIndex[0]].overall;
+        // document.getElementById("pf").innerHTML = playerLabel[resIndex[0]].pf;
+        document.getElementById("image").src = image[randNuber];
+        console.log(`The player matches the input ${inputData} is`, resIndex, playerLabel[resIndex[0]]);
+    })
 }
 
 async function process() {
