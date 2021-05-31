@@ -45,6 +45,11 @@ async function formatData(data) {
         activation: 'sigmoid',
         inputDim: 35
     });
+    let hidden1 = tf.layers.dense({
+        units: 36,
+        useBias: true,
+        activation: 'relu'
+    });
     let hidden2 = tf.layers.dense({
         units: 20,
         useBias: true,
@@ -56,6 +61,7 @@ async function formatData(data) {
     });
 
     model.add(hidden);
+    model.add(hidden1);
     model.add(hidden2);
     model.add(output);
 
