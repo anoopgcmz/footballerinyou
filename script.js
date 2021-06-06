@@ -5,113 +5,98 @@ let xs, ys;
 let posLabel = [];
 let inputData;
 
-// async function preload() {
-//     console.log('Fetching Data');
-//     $.getJSON("./data.json", async function (data) {
-//         await formatData(data.results)
-//     });
-// }
+async function preload() {
+    console.log('Fetching Data');
+    $.getJSON("./data.json", async function (data) {
+        await formatData(data.results)
+    });
+}
 
-// async function formatData(data) {
-//     let playerRecord = [];
-//     let playerLabelTens = [];
-//     for (let i = 0; i < 3000; i++) {
-//         let preferedFoot = data[i]['Preferred Foot'] == 'Right' ? 1 : 0;
-//         let players = [preferedFoot, data[i].Crossing, data[i].Finishing, data[i].HeadingAccuracy, data[i].ShortPassing, data[i].Volleys, data[i].Dribbling, data[i].Curve, data[i].FKAccuracy, data[i].LongPassing, data[i].BallControl, data[i].Acceleration, data[i].SprintSpeed, data[i].Reactions, data[i].Balance, data[i].ShotPower, data[i].Jumping, data[i].Stamina, data[i].Strength, data[i].Agility, data[i].LongShots, data[i].Aggression, data[i].Interceptions, data[i].Positioning, data[i].Vision, data[i].Penalties, data[i].Composure, data[i].Marking, data[i].StandingTackle, data[i].SlidingTackle, data[i].GKDiving, data[i].GKHandling, data[i].GKKicking, data[i].GKPositioning, data[i].GKReflexes];
-//         playerRecord.push(players);
-//         playerLabel.push({
-//             'name': data[i].Name,
-//             'club': data[i].Club,
-//             'age': data[i].Age,
-//             'overall': data[i].Overall,
-//             'potential': data[i].Potential,
-//             'position': data[i].Position,
-//             'pf': data[i]['Preferred Foot']
-//         });
-//         posLabel.push(data[i].Position);
-//         playerLabelTens.push(i)
-//     }
-//     console.log(...new Set(posLabel));
-//     xs = tf.tensor2d(playerRecord);
-//     let labelTensor = tf.tensor1d(playerLabelTens, 'int32');
-//     ys = tf.oneHot(labelTensor, 3000);
-//     labelTensor.dispose();
-//     // xs.print();
-//     // ys.print();
+async function formatData(data) {
+    let playerRecord = [];
+    let playerLabelTens = [];
+    for (let i = 0; i < 3000; i++) {
+        let preferedFoot = data[i]['Preferred Foot'] == 'Right' ? 1 : 0;
+        let players = [preferedFoot, data[i].Crossing, data[i].Finishing, data[i].HeadingAccuracy, data[i].ShortPassing, data[i].Volleys, data[i].Dribbling, data[i].Curve, data[i].FKAccuracy, data[i].LongPassing, data[i].BallControl, data[i].Acceleration, data[i].SprintSpeed, data[i].Reactions, data[i].Balance, data[i].ShotPower, data[i].Jumping, data[i].Stamina, data[i].Strength, data[i].Agility, data[i].LongShots, data[i].Aggression, data[i].Interceptions, data[i].Positioning, data[i].Vision, data[i].Penalties, data[i].Composure, data[i].Marking, data[i].StandingTackle, data[i].SlidingTackle, data[i].GKDiving, data[i].GKHandling, data[i].GKKicking, data[i].GKPositioning, data[i].GKReflexes];
+        playerRecord.push(players);
+        playerLabel.push({
+            'name': data[i].Name,
+            'club': data[i].Club,
+            'age': data[i].Age,
+            'overall': data[i].Overall,
+            'potential': data[i].Potential,
+            'position': data[i].Position,
+            'pf': data[i]['Preferred Foot']
+        });
+        //posLabel.push(data[i].Position);
+        playerLabelTens.push(i)
+    }
+    //console.log(...new Set(posLabel));
+    xs = tf.tensor2d(playerRecord);
+    let labelTensor = tf.tensor1d(playerLabelTens, 'int32');
+    ys = tf.oneHot(labelTensor, 3000);
+    labelTensor.dispose();
+    // xs.print();
+    // ys.print();
 
-//     model = tf.sequential();
-//     let hidden = tf.layers.dense({
-//         units: 10,
-//         activation: 'sigmoid',
-//         inputDim: 35
-//     });
-//     let hidden1 = tf.layers.dense({
-//         units: 36,
-//         useBias: true,
-//         activation: 'relu'
-//     });
-//     let hidden2 = tf.layers.dense({
-//         units: 20,
-//         useBias: true,
-//         activation: 'relu'
-//     });
-//     let output = tf.layers.dense({
-//         units: 3000,
-//         activation: 'softmax'
-//     });
+    model = tf.sequential();
+    let hidden = tf.layers.dense({
+        units: 10,
+        activation: 'relu',
+        inputDim: 35
+    });
+    let hidden2 = tf.layers.dense({
+        units: 20,
+        useBias: true,
+        activation: 'relu'
+    });
+    let output = tf.layers.dense({
+        units: 3000,
+        activation: 'softmax'
+    });
 
-//     model.add(hidden);
-//     model.add(hidden1);
-//     model.add(hidden2);
-//     model.add(output);
+    model.add(hidden);
+    model.add(hidden2);
+    model.add(output);
 
-//     //create optimiser
+    //create optimiser
 
-//     const lr = 0.2;
-//     const optimizer = tf.train.sgd(lr)
+    const lr = 0.2;
+    const optimizer = tf.train.adam()
 
-//     model.compile({
-//         optimizer: optimizer,
-//         loss: 'categoricalCrossentropy'
-//     })
+    model.compile({
+        optimizer: optimizer,
+        loss: 'categoricalCrossentropy'
+    })
 
-//     train();
-// };
+    train();
+};
 
-// async function train() {
-//     const options = {
-//         epochs: 30,
-//         validationSplit: 0.1,
-//         shuffle: true,
-//         callbacks: {
-//             onTrainBegin: () => document.getElementById("club").innerHTML = 'Finding player <div class="blink_me">...</div>',
-//             onTrainEnd: () => document.getElementById("club").innerHTML = 'Loading Player',
-//         }
-//     }
-//     await model.fit(xs, ys, options).then((result) => {
-//         console.log(">>>>", result.history.loss[29]);
-//     }).catch((err) => {
-//         console.log("error=", err);
-//     });
+async function train() {
+    const options = {
+        epochs: 30,
+        validationSplit: 0.1,
+        shuffle: true,
+        callbacks: {
+            onTrainBegin: () => document.getElementById("club").innerHTML = 'Finding player <div class="blink_me">...</div>',
+            onTrainEnd: () => document.getElementById("club").innerHTML = 'Loading Player',
+        }
+    }
+    await model.fit(xs, ys, options).then((result) => {
+        console.log(">>>>", result.history.loss[29]);
+    }).catch((err) => {
+        console.log("error=", err);
+    });
 
-//     test();
+    test();
 
-// }
-
-function normslised(tensor){
-    const min = tensor.min();
-    const max = tensor.max();
-    const normaliseTensor = tensor.sub(min).div(max.sub(min)); 
-    return normaliseTensor;
 }
 
 async function test() {
     console.log(inputData);
-    model = await tf.loadLayersModel('https://github.com/anoopgcmz/footballerinyou/blob/main/model.json');
-    let input = tf.tensor2d([inputData]);
-    let normalisedInput = await normslised(input)
     tf.tidy(() => {
-        let result = model.predict(normalisedInput);
+        let input = tf.tensor2d([inputData]);
+        let result = model.predict(input);
         let resIndex = result.argMax(1).dataSync();
         let image = ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/giant.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png"];
         let randNuber = Math.floor(Math.random() * image.length);
@@ -173,5 +158,5 @@ async function process() {
     document.getElementById("overall").innerHTML = "";
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    await test();
+    await preload();
 }
