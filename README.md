@@ -1,5 +1,5 @@
 # footballer in you 
-https://anoopgcmz.github.io/footballerinyou/ - Have a try
+https://anoopgcmz.github.io/footballerinyou/ - Play It
 
 This is a fun game. User can give their soccer attributes and the system will predict you a player, with position, club ,overall and potential. 
 
