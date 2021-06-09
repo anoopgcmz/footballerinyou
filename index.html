@@ -8,6 +8,7 @@
     <title>Predict the player In you</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="new.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,7 +22,7 @@
     potential: <label id="potential"></label> <br />
     overall: <label id="overall"></label> <br />
     preferd foot: <label id="pf"></label> <br /> -->
-    <div class="slide-container">
+    <div class="slide-container" style="margin-bottom: 0px;">
         <div class="wrapper">
             <div class="clash-card barbarian">
                 <div class="clash-card__image clash-card__image--barbarian">
@@ -55,218 +56,65 @@
             </div> <!-- end clash-card barbarian-->
         </div> <!-- end wrapper -->
     </div> <!-- end container -->
-    <div class="container-fluid">
-        <form name="football">
-            <div class="form-row">
-                <div class="card" style="width: 23rem;">
-                    <div class="card-header">
-                        Ball Skills
-                    </div>
-                    <div>
-                        <div class="form-group cardValue">
-                            <label for="pfin">Prefered Foot</label>
-                            <select id="pfin" class="form-control">
-                                <option selected value="1">Right</option>
-                                <option value="0">Left</option>
-                            </select>
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="dribbling">Dribbling</label>
-                            <input type="number" class="form-control" id="dribbling" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="ballcontrol">Ball Control</label>
-                            <input type="number" class="form-control" id="ballcontrol" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="penalties">Penalties</label>
-                            <input type="number" class="form-control" id="penalties" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="volleys">Volleys</label>
-                            <input type="number" class="form-control" id="volleys" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="sprintspeed">Sprint Speed</label>
-                            <input type="number" class="form-control" id="sprintspeed" value="50">
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 23rem;">
-                    <div class="card-header">
-                        Shooting
-                    </div>
-                    <div>
-                        <div class="form-group cardValue">
-                            <label for="headingaccuracy">Heading</label>
-                            <input type="number" class="form-control" id="headingaccuracy" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="shotpower">Shot Power</label>
-                            <input type="number" class="form-control" id="shotpower" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="finishing">Finishing</label>
-                            <input type="number" class="form-control" id="finishing" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="longShots">Long Shot</label>
-                            <input type="number" class="form-control" id="longshots" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="curve">Curve</label>
-                            <input type="number" class="form-control" id="curve" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="fkaccuracy">Free Kick Accuracy</label>
-                            <input type="number" class="form-control" id="fkaccuracy" value="50">
-                        </div>
+    <div class="container margin_bottom_5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <h2 class="card-title text-center"> Footballer In You</h2>
+                    <div class="card-body py-md-4">
+                        <form name="football">
+                            <div class="form-group">
+                                <label for="name">Prefered Foot</label>
+                                <select id="pfin" class="form-control">
+                                    <option class="dropdown" selected value="1">Right</option>
+                                    <option class="dropdown" value="0">Left</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Shooting</label>
+                                <input type="number" class="form-control" min="1" max="99" id="shooting" value="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Ball Skills & Passing</label>
+                                <input type="number" class="form-control" min="1" max="99" id="bsp" value="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Defense and Mental Ability</label>
+                                <input type="number" class="form-control" min="1" max="99" id="dfm" value="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Physical</label>
+                                <input type="number" class="form-control" min="1" max="99" id="physical" value="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Goalkeeper Skills</label>
+                                <input type="number" class="form-control" min="1" max="99" id="gkability" value="50">
+                            </div>
+                            <div class="d-flex flex-row align-items-center justify-content-center">
+                                <button style="margin-top: 28px;padding-top: 2px;" type='button' onclick="process()"
+                    class="btn btn-dark form-control">Generate</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="card" style="width: 23rem;">
-                    <div class="card-header">
-                        Defence & Passing
-                    </div>
-                    <div>
-                        <div class="form-group cardValue">
-                            <label for="marking">Marking</label>
-                            <input type="number" class="form-control" id="marking" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="slidingtackle">Slide Tackle</label>
-                            <input type="number" class="form-control" id="slidingtackle" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="standingtackle">Stand Tackle</label>
-                            <input type="number" class="form-control" id="standingtackle" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="crossing">Crossing</label>
-                            <input type="number" class="form-control" id="crossing" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="shortpassing">Short Pass</label>
-                            <input type="number" class="form-control" id="shortpassing" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="longpassing">Long Pass</label>
-                            <input type="number" class="form-control" id="longpassing" value="50">
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 23rem;">
-                    <div class="card-header">
-                        Physical
-                    </div>
-                    <div>
-                        <div class="form-group cardValue">
-                            <label for="acceleration">Acceleration</label>
-                            <input type="number" class="form-control" id="acceleration" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="stamina">Stamina</label>
-                            <input type="number" class="form-control" id="stamina" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="strength">Strength</label>
-                            <input type="number" class="form-control" id="strength" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="balance">Balance</label>
-                            <input type="number" class="form-control" id="balance" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="agility">Agility</label>
-                            <input type="number" class="form-control" id="agility" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="jumping">Jumping</label>
-                            <input type="number" class="form-control" id="jumping" value="50">
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 23rem;">
-                    <div class="card-header">
-                        Mental
-                    </div>
-                    <div>
-                        <div class="form-group cardValue">
-                            <label for="aggression">Aggression</label>
-                            <input type="number" class="form-control" id="aggression" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="reactions">Reactions</label>
-                            <input type="number" class="form-control" id="reactions" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="positioning">Att. Position</label>
-                            <input type="number" class="form-control" id="positioning" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="interceptions">Interceptions</label>
-                            <input type="number" class="form-control" id="interceptions" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="vision">Vision</label>
-                            <input type="number" class="form-control" id="vision" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="composure">Composure</label>
-                            <input type="number" class="form-control" id="composure" value="50">
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 23rem;">
-                    <div class="card-header">
-                        Goalkeeper
-                    </div>
-                    <div>
-                        <div class="form-group cardValue">
-                            <label for="gkdiving">GK Diving</label>
-                            <input type="number" class="form-control" id="gkdiving" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="gkhandling">GK Handling</label>
-                            <input type="number" class="form-control" id="gkhandling" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="gkkicking">GK Kicking</label>
-                            <input type="number" class="form-control" id="gkkicking" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="gkpositioning">GK Positioning</label>
-                            <input type="number" class="form-control" id="gkpositioning" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <label for="gkreflexes">GK Reflexes</label>
-                            <input type="number" class="form-control" id="gkreflexes" value="50">
-                        </div>
-                        <div class="form-group cardValue">
-                            <button style="margin-top: 28px;padding-top: 2px;" type='button' onclick="process()"
-                                class="btn btn-dark form-control">Generate</button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-        </form>
+        </div>
     </div>
-    <div class="container text-right">
+    <div class="container margin_bottom_5 text-right">
         <a class="about" href="about.html" target="_blank">More Info</a>
     </div>
-    <div>
-        <br />
-    </div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RPLV8EZ9DT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPLV8EZ9DT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-RPLV8EZ9DT');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RPLV8EZ9DT');
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
