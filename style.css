@@ -6,7 +6,7 @@
 
 body {
   background: linear-gradient(to bottom, #8c7a7a 0%, #af877c 65%, #af877c 100%) fixed;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/coc-background.jpg") no-repeat center center fixed;
+  background: url("img/bg.jfif") no-repeat center center fixed;
   background-size: cover;
   font: 15px/20px "Lato", Arial, sans-serif;
   color: #9E9E9E;
@@ -45,20 +45,20 @@ body {
 
 .clash-card__image {
   position: relative;
-  height: 230px;
-  margin-bottom: 35px;
+  height: 250px;
+  margin-bottom: 20px;
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
 }
 
-.clash-card__image--barbarian {
+/* .clash-card__image--barbarian {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
-}
+} */
 .clash-card__image--barbarian img {
-  width: 400px;
+  width: 300px;
   position: absolute;
-  top: -65px;
-  left: -70px;
+  top: 0px;
+  left: 0px;
 }
 
 .clash-card__image--archer {
@@ -277,7 +277,10 @@ input {
   animation: blinker 1s linear infinite;
   color: black;
 }
-
+.imgStyle {
+  height: 100%;
+  border-radius: 20px 20px 0px 0px;
+}
 @keyframes blinker {
   50% {
     opacity: 0;
