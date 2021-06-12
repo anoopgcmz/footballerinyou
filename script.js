@@ -11,7 +11,13 @@ async function preload() {
         await formatData(data)
     });
 }
-
+var loadFile = function(event) {
+    var output = document.getElementById("image");
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
 async function formatData(data) {
     let playerRecord = [];
     let playerLabelTens = [];
@@ -93,7 +99,7 @@ async function train() {
 
 async function test() {
     console.log(inputData);
-    let model = await tf.loadLayersModel('savemodel/model.json');
+    let model = await tf.loadLayersModel('savemodel/model.json');//await tf.loadLayersModel('http:savemodel/model.json');
     let input = tf.tensor2d([inputData]);
     let result = await model.predict(input);
     let resIndex = result.argMax(1).dataSync();
@@ -102,12 +108,12 @@ async function test() {
     console.log(randNuber);
     document.getElementById("plyername").innerHTML = playerLabel[resIndex[0]].name;
     document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
-    document.getElementById("position").innerHTML = playerLabel[resIndex[0]].position;
+    document.getElementById("position").innerHTML = "<label style=`color:black`>Your attributes matches to</label> <br />"+ playerLabel[resIndex[0]].position;
     document.getElementById("club").innerHTML = playerLabel[resIndex[0]].club;
     document.getElementById("potential").innerHTML = playerLabel[resIndex[0]].potential;
     document.getElementById("overall").innerHTML = playerLabel[resIndex[0]].overall;
     // document.getElementById("pf").innerHTML = playerLabel[resIndex[0]].pf;
-    document.getElementById("image").src = image[randNuber];
+    //document.getElementById("image").src = image[randNuber];
     console.log(`The player matches the input ${inputData} is`, resIndex, playerLabel[resIndex[0]]);
 
 }
