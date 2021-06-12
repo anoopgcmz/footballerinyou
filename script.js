@@ -16,7 +16,7 @@ async function formatData(data) {
     let playerRecord = [];
     let playerLabelTens = [];
     for (let i = 0; i < 3000; i++) {
-        let players = [data[i].prefered_foot, data[i].ballskills_and_passing,data[i].defense_and_mental,data[i].physical,data[i].shooting,data[i].gk_ability];
+        let players = [data[i].prefered_foot, data[i].ballskills_and_passing, data[i].defense_and_mental, data[i].physical, data[i].shooting, data[i].gk_ability];
         playerRecord.push(players);
         playerLabel.push({
             'name': data[i].name,
@@ -38,54 +38,54 @@ async function formatData(data) {
     // xs.print();
     //ys.print();
 
-    model = tf.sequential();
-    let hidden = tf.layers.dense({
-        units: 100,
-        activation: 'relu',
-        inputDim: 6
-    });
-    let hidden2 = tf.layers.dense({
-        units: 200,
-        useBias: true,
-        activation: 'relu'
-    });
-    let output = tf.layers.dense({
-        units: 3000,
-        activation: 'softmax'
-    });
+    // model = tf.sequential();
+    // let hidden = tf.layers.dense({
+    //     units: 100,
+    //     activation: 'relu',
+    //     inputDim: 6
+    // });
+    // let hidden2 = tf.layers.dense({
+    //     units: 200,
+    //     useBias: true,
+    //     activation: 'relu'
+    // });
+    // let output = tf.layers.dense({
+    //     units: 3000,
+    //     activation: 'softmax'
+    // });
 
-    model.add(hidden);
-    model.add(hidden2);
-    model.add(output);
+    // model.add(hidden);
+    // model.add(hidden2);
+    // model.add(output);
 
-    //create optimiser
+    // //create optimiser
 
-    const lr = 0.2;
-    const optimizer = tf.train.adam();
+    // const lr = 0.2;
+    // const optimizer = tf.train.adam();
 
-    model.compile({
-        optimizer: optimizer,
-        loss: 'categoricalCrossentropy'
-    })
+    // model.compile({
+    //     optimizer: optimizer,
+    //     loss: 'categoricalCrossentropy'
+    // })
 
     train();
 };
 
 async function train() {
-    const options = {
-        epochs: 30,
-        validationSplit: 0.1,
-        shuffle: true,
-        callbacks: {
-            onTrainBegin: () => document.getElementById("club").innerHTML = 'Finding player <div class="blink_me">...</div>',
-            onTrainEnd: () => document.getElementById("club").innerHTML = 'Loading Player',
-        }
-    }
-    await model.fit(xs, ys, options).then((result) => {
-        console.log(">>>>", result.history.loss[29]);
-    }).catch((err) => {
-        console.log("error=", err);
-    });
+    // const options = {
+    //     epochs: 30,
+    //     validationSplit: 0.1,
+    //     shuffle: true,
+    //     callbacks: {
+    //         onTrainBegin: () => document.getElementById("club").innerHTML = 'Finding player <div class="blink_me">...</div>',
+    //         onTrainEnd: () => document.getElementById("club").innerHTML = 'Loading Player',
+    //     }
+    // }
+    // await model.fit(xs, ys, options).then((result) => {
+    //     console.log(">>>>", result.history.loss[29]);
+    // }).catch((err) => {
+    //     console.log("error=", err);
+    // });
 
     test();
 
@@ -93,27 +93,27 @@ async function train() {
 
 async function test() {
     console.log(inputData);
-    tf.tidy(() => {
-        let input = tf.tensor2d([inputData]);
-        let result = model.predict(input);
-        let resIndex = result.argMax(1).dataSync();
-        let image = ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/giant.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png"];
-        let randNuber = Math.floor(Math.random() * image.length);
-        console.log(randNuber);
-        document.getElementById("plyername").innerHTML = playerLabel[resIndex[0]].name;
-        document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
-        document.getElementById("position").innerHTML = playerLabel[resIndex[0]].position;
-        document.getElementById("club").innerHTML = playerLabel[resIndex[0]].club;
-        document.getElementById("potential").innerHTML = playerLabel[resIndex[0]].potential;
-        document.getElementById("overall").innerHTML = playerLabel[resIndex[0]].overall;
-        // document.getElementById("pf").innerHTML = playerLabel[resIndex[0]].pf;
-        document.getElementById("image").src = image[randNuber];
-        console.log(`The player matches the input ${inputData} is`, resIndex, playerLabel[resIndex[0]]);
-    })
+    let model = await tf.loadLayersModel('http:savemodel/model.json');
+    let input = tf.tensor2d([inputData]);
+    let result = await model.predict(input);
+    let resIndex = result.argMax(1).dataSync();
+    let image = ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/giant.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard.png", "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png"];
+    let randNuber = Math.floor(Math.random() * image.length);
+    console.log(randNuber);
+    document.getElementById("plyername").innerHTML = playerLabel[resIndex[0]].name;
+    document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
+    document.getElementById("position").innerHTML = playerLabel[resIndex[0]].position;
+    document.getElementById("club").innerHTML = playerLabel[resIndex[0]].club;
+    document.getElementById("potential").innerHTML = playerLabel[resIndex[0]].potential;
+    document.getElementById("overall").innerHTML = playerLabel[resIndex[0]].overall;
+    // document.getElementById("pf").innerHTML = playerLabel[resIndex[0]].pf;
+    document.getElementById("image").src = image[randNuber];
+    console.log(`The player matches the input ${inputData} is`, resIndex, playerLabel[resIndex[0]]);
+
 }
 
 async function process() {
-    inputData = [parseInt(document.forms["football"]["pfin"].value),parseInt(document.forms["football"]["bsp"].value)/100,parseInt(document.forms["football"]["dfm"].value)/100,parseInt(document.forms["football"]["physical"].value)/100,parseInt(document.forms["football"]["shooting"].value)/100,parseInt(document.forms["football"]["gkability"].value)/100]
+    inputData = [parseInt(document.forms["football"]["pfin"].value), parseInt(document.forms["football"]["bsp"].value) / 100, parseInt(document.forms["football"]["dfm"].value) / 100, parseInt(document.forms["football"]["physical"].value) / 100, parseInt(document.forms["football"]["shooting"].value) / 100, parseInt(document.forms["football"]["gkability"].value) / 100]
     // // [parseInt(document.forms["football"]["pfin"].value),
     // //     parseInt(document.forms["football"]["crossing"].value),
     // //     parseInt(document.forms["football"]["finishing"].value),
