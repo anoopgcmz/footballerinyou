@@ -93,7 +93,7 @@ async function train() {
 
 async function test() {
     console.log(inputData);
-    let model = await tf.loadLayersModel('http:savemodel/model.json');
+    let model = await tf.loadLayersModel('savemodel/model.json');
     let input = tf.tensor2d([inputData]);
     let result = await model.predict(input);
     let resIndex = result.argMax(1).dataSync();
