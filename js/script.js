@@ -4,7 +4,7 @@ let model;
 let xs, ys;
 let posLabel = [];
 let inputData;
-
+document.getElementById("validationMsg").style.display = "none";
 async function preload() {
     console.log('Fetching Data');
     $.getJSON("./data/fifadata.json", async function (data) {
@@ -170,8 +170,19 @@ async function process() {
 function limit(element)
 {
     var max_chars = 2;
+    var min_chars = 0;
 
     if(element.value.length > max_chars) {
         element.value = element.value.substr(0, max_chars);
+    }
+    if(element.value.length == min_chars) {
+        document.getElementById("generateBtn").disabled = true;
+        document.getElementById("validationMsg").style.display = "block";
+        document.getElementById("validationMsg").innerHTML = "Please fill all the Fields";
+    }
+    if(element.value.length > min_chars) {
+        document.getElementById("generateBtn").disabled = false;
+        document.getElementById("validationMsg").style.display = "none";
+        document.getElementById("validationMsg").innerHTML =  "";
     }
 }
