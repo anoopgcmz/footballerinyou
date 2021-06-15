@@ -41,60 +41,11 @@ async function formatData(data) {
     let labelTensor = tf.tensor1d(playerLabelTens, 'int32');
     ys = tf.oneHot(labelTensor, 3000);
     labelTensor.dispose();
-    // xs.print();
-    //ys.print();
-
-    // model = tf.sequential();
-    // let hidden = tf.layers.dense({
-    //     units: 100,
-    //     activation: 'relu',
-    //     inputDim: 6
-    // });
-    // let hidden2 = tf.layers.dense({
-    //     units: 200,
-    //     useBias: true,
-    //     activation: 'relu'
-    // });
-    // let output = tf.layers.dense({
-    //     units: 3000,
-    //     activation: 'softmax'
-    // });
-
-    // model.add(hidden);
-    // model.add(hidden2);
-    // model.add(output);
-
-    // //create optimiser
-
-    // const lr = 0.2;
-    // const optimizer = tf.train.adam();
-
-    // model.compile({
-    //     optimizer: optimizer,
-    //     loss: 'categoricalCrossentropy'
-    // })
-
     train();
 };
 
 async function train() {
-    // const options = {
-    //     epochs: 30,
-    //     validationSplit: 0.1,
-    //     shuffle: true,
-    //     callbacks: {
-    //         onTrainBegin: () => document.getElementById("club").innerHTML = 'Finding player <div class="blink_me">...</div>',
-    //         onTrainEnd: () => document.getElementById("club").innerHTML = 'Loading Player',
-    //     }
-    // }
-    // await model.fit(xs, ys, options).then((result) => {
-    //     console.log(">>>>", result.history.loss[29]);
-    // }).catch((err) => {
-    //     console.log("error=", err);
-    // });
-
     test();
-
 }
 
 async function test() {
@@ -107,9 +58,10 @@ async function test() {
     let randNuber = Math.floor(Math.random() * image.length);
     console.log(randNuber);
     document.getElementById("plyername").innerHTML = playerLabel[resIndex[0]].name;
-    document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
-    document.getElementById("position").innerHTML = "<label style=`color:black`>Your attributes matches to</label> <br />"+ playerLabel[resIndex[0]].position;
-    document.getElementById("club").innerHTML = playerLabel[resIndex[0]].club;
+    // document.getElementById("age").innerHTML = playerLabel[resIndex[0]].age;
+    document.getElementById("positiontext").innerHTML = "<label style=`color:black`>Your attributes matches to</label> <br />";
+    document.getElementById("position").innerHTML = playerLabel[resIndex[0]].position;
+    document.getElementById("club").innerHTML = "<label style=`color:black`>when playing for </label> <b>"+playerLabel[resIndex[0]].club+"</b>";
     document.getElementById("potential").innerHTML = playerLabel[resIndex[0]].potential;
     document.getElementById("overall").innerHTML = playerLabel[resIndex[0]].overall;
     // document.getElementById("pf").innerHTML = playerLabel[resIndex[0]].pf;
@@ -120,44 +72,8 @@ async function test() {
 
 async function process() {
     inputData = [parseInt(document.forms["football"]["pfin"].value), parseInt(document.forms["football"]["bsp"].value) / 100, parseInt(document.forms["football"]["dfm"].value) / 100, parseInt(document.forms["football"]["physical"].value) / 100, parseInt(document.forms["football"]["shooting"].value) / 100, parseInt(document.forms["football"]["gkability"].value) / 100]
-    // // [parseInt(document.forms["football"]["pfin"].value),
-    // //     parseInt(document.forms["football"]["crossing"].value),
-    // //     parseInt(document.forms["football"]["finishing"].value),
-    // //     parseInt(document.forms["football"]["headingaccuracy"].value),
-    // //     parseInt(document.forms["football"]["shortpassing"].value),
-    // //     parseInt(document.forms["football"]["volleys"].value),
-    // //     parseInt(document.forms["football"]["dribbling"].value),
-    // //     parseInt(document.forms["football"]["curve"].value),
-    // //     parseInt(document.forms["football"]["fkaccuracy"].value),
-    // //     parseInt(document.forms["football"]["longpassing"].value),
-    // //     parseInt(document.forms["football"]["ballcontrol"].value),
-    // //     parseInt(document.forms["football"]["acceleration"].value),
-    // //     parseInt(document.forms["football"]["sprintspeed"].value),
-    // //     parseInt(document.forms["football"]["agility"].value),
-    // //     parseInt(document.forms["football"]["reactions"].value),
-    // //     parseInt(document.forms["football"]["balance"].value),
-    // //     parseInt(document.forms["football"]["shotpower"].value),
-    // //     parseInt(document.forms["football"]["jumping"].value),
-    // //     parseInt(document.forms["football"]["stamina"].value),
-    // //     parseInt(document.forms["football"]["strength"].value),
-    // //     parseInt(document.forms["football"]["longshots"].value),
-    // //     parseInt(document.forms["football"]["aggression"].value),
-    // //     parseInt(document.forms["football"]["interceptions"].value),
-    // //     parseInt(document.forms["football"]["positioning"].value),
-    // //     parseInt(document.forms["football"]["vision"].value),
-    // //     parseInt(document.forms["football"]["penalties"].value),
-    // //     parseInt(document.forms["football"]["composure"].value),
-    // //     parseInt(document.forms["football"]["marking"].value),
-    // //     parseInt(document.forms["football"]["standingtackle"].value),
-    // //     parseInt(document.forms["football"]["slidingtackle"].value),
-    // //     parseInt(document.forms["football"]["gkdiving"].value),
-    // //     parseInt(document.forms["football"]["gkhandling"].value),
-    // //     parseInt(document.forms["football"]["gkkicking"].value),
-    // //     parseInt(document.forms["football"]["gkpositioning"].value),
-    // //     parseInt(document.forms["football"]["gkreflexes"].value)
-    // // ]
     document.getElementById("plyername").innerHTML = "";
-    document.getElementById("age").innerHTML = "";
+    // document.getElementById("age").innerHTML = "";
     document.getElementById("position").innerHTML = "";
     document.getElementById("club").innerHTML = "";
     document.getElementById("potential").innerHTML = "";
